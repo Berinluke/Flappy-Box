@@ -1,0 +1,254 @@
+<html>
+    <canvas id="box collector using random" width="1500" height="700"></canvas>
+    <script src="Player.js"></script>
+   <script src="Obstacle.js"></script>
+    <script>
+        var g_canvas=document.getElementById("box collector using random");
+        var g_context=g_canvas.getContext("2d");
+        var frameRate=30;
+        var TimeInterval=1000/frameRate;
+        var Start_draw_flag=0;
+        var Start_game_flag=0;
+        
+        var Obj_Player=new c_square(0,300,50,"#fff000",10);
+        
+        var Obj_Obs_1_Row_1=new C_Obstacle(400,100,50,200,"#ff0000",-15);
+        var Obj_Obs_2_Row_1=new C_Obstacle(400,400,50,200,"#ff0000",15);
+        
+        var Obj_Obs_1_Row_2=new C_Obstacle(600,100,50,100,"#4eff00",-15);
+        var Obj_Obs_2_Row_2=new C_Obstacle(600,600,50,100,"#4eff00",15);
+        var Obj_Obs_3_Row_2=new C_Obstacle(600,300,50,250,"#4eff00",20);
+        
+        var Obj_Obs_1_Row_3=new C_Obstacle(800,400,50,100,"#00ffff",30);
+        var Obj_Obs_2_Row_3=new C_Obstacle(800,100,50,200,"#00ffff",-15);
+        var Obj_Obs_3_Row_3=new C_Obstacle(800,500,50,200,"#00ffff",15);
+        
+        var Obj_Obs_1_Row_4=new C_Obstacle(1000,100,50,250,"#0a00ff",-20);
+        var Obj_Obs_2_Row_4=new C_Obstacle(1000,550,50,250,"#0a00ff",20);
+        
+        var Obj_Obs_1_Row_5=new C_Obstacle(1200,50,50,50,"#ce00ff",-15);
+        var Obj_Obs_2_Row_5=new C_Obstacle(1200,200,50,50,"#ce00ff",25);
+        var Obj_Obs_3_Row_5=new C_Obstacle(1200,400,50,50,"#ce00ff",-15);
+        var Obj_Obs_4_Row_5=new C_Obstacle(1200,550,50,50,"#ce00ff",25);
+        
+        var obj_Obs_1_Hori_1=new C_Obstacle(405,0,100,50,"#551265",15);
+        
+        var obj_Obs_1_Hori_2=new C_Obstacle(1200,650,100,50,"#551265",-15);
+        
+        
+        function f_obstacleMovement()  
+        {
+            
+                Obj_Obs_1_Row_1.m_Obstacle_Movement();
+                Obj_Obs_2_Row_1.m_Obstacle_Movement();
+                
+                Obj_Obs_1_Row_2.m_Obstacle_Movement();
+                Obj_Obs_2_Row_2.m_Obstacle_Movement();
+                Obj_Obs_3_Row_2.m_Obstacle_Movement();
+                
+                Obj_Obs_1_Row_3.m_Obstacle_Movement();
+                Obj_Obs_2_Row_3.m_Obstacle_Movement();
+                Obj_Obs_3_Row_3.m_Obstacle_Movement();
+                
+                Obj_Obs_1_Row_4.m_Obstacle_Movement();
+                Obj_Obs_2_Row_4.m_Obstacle_Movement();
+                
+                Obj_Obs_1_Row_5.m_Obstacle_Movement();
+                Obj_Obs_2_Row_5.m_Obstacle_Movement();
+                Obj_Obs_3_Row_5.m_Obstacle_Movement();
+                Obj_Obs_4_Row_5.m_Obstacle_Movement();
+            
+                obj_Obs_1_Hori_1.m_Obstacle_Horizontal_Movement();
+                obj_Obs_1_Hori_2.m_Obstacle_Horizontal_Movement();
+            
+        }
+        
+        function f_obstacle_Border_Collision()
+        {
+                Obj_Player.m_Player_Border_collision(g_canvas);
+            
+                Obj_Obs_1_Row_1.m_Obstacle_Collision(g_canvas);
+                Obj_Obs_2_Row_1.m_Obstacle_Collision(g_canvas);
+                
+                Obj_Obs_1_Row_2.m_Obstacle_Collision(g_canvas);
+                Obj_Obs_2_Row_2.m_Obstacle_Collision(g_canvas);
+                Obj_Obs_3_Row_2.m_Obstacle_Collision(g_canvas);
+                
+                Obj_Obs_1_Row_3.m_Obstacle_Collision(g_canvas);
+                Obj_Obs_2_Row_3.m_Obstacle_Collision(g_canvas);
+                Obj_Obs_3_Row_3.m_Obstacle_Collision(g_canvas);
+                
+                Obj_Obs_1_Row_4.m_Obstacle_Collision(g_canvas);
+                Obj_Obs_2_Row_4.m_Obstacle_Collision(g_canvas);
+                
+                Obj_Obs_1_Row_5.m_Obstacle_Collision(g_canvas);
+                Obj_Obs_2_Row_5.m_Obstacle_Collision(g_canvas);
+                Obj_Obs_3_Row_5.m_Obstacle_Collision(g_canvas);
+                Obj_Obs_4_Row_5.m_Obstacle_Collision(g_canvas);
+            
+                obj_Obs_1_Hori_1.m_Obstacle_Horizontal_Border_Collision();
+                obj_Obs_1_Hori_2.m_Obstacle_Horizontal_Border_Collision();
+        }
+        
+        
+        
+        function f_player_And_Obstacle_Collision_Logic()
+        {
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_1_Row_1.Xpos,Obj_Obs_1_Row_1.Ypos,Obj_Obs_1_Row_1.Width,Obj_Obs_1_Row_1.Height)
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_2_Row_1.Xpos,Obj_Obs_2_Row_1.Ypos,Obj_Obs_2_Row_1.Width,Obj_Obs_2_Row_1.Height)
+            
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_1_Row_2.Xpos,Obj_Obs_1_Row_2.Ypos,Obj_Obs_1_Row_2.Width,Obj_Obs_1_Row_2.Height)
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_2_Row_2.Xpos,Obj_Obs_2_Row_2.Ypos,Obj_Obs_2_Row_2.Width,Obj_Obs_2_Row_2.Height)
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_3_Row_2.Xpos,Obj_Obs_3_Row_2.Ypos,Obj_Obs_3_Row_2.Width,Obj_Obs_3_Row_2.Height)
+            
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_1_Row_3.Xpos,Obj_Obs_1_Row_3.Ypos,Obj_Obs_1_Row_3.Width,Obj_Obs_1_Row_3.Height)
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_2_Row_3.Xpos,Obj_Obs_2_Row_3.Ypos,Obj_Obs_2_Row_3.Width,Obj_Obs_2_Row_3.Height)
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_3_Row_3.Xpos,Obj_Obs_3_Row_3.Ypos,Obj_Obs_3_Row_3.Width,Obj_Obs_3_Row_3.Height)
+            
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_1_Row_4.Xpos,Obj_Obs_1_Row_4.Ypos,Obj_Obs_1_Row_4.Width,Obj_Obs_1_Row_4.Height)
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_2_Row_4.Xpos,Obj_Obs_2_Row_4.Ypos,Obj_Obs_2_Row_4.Width,Obj_Obs_2_Row_4.Height)
+            
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_1_Row_5.Xpos,Obj_Obs_1_Row_5.Ypos,Obj_Obs_1_Row_5.Width,Obj_Obs_1_Row_5.Height)
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_2_Row_5.Xpos,Obj_Obs_2_Row_5.Ypos,Obj_Obs_2_Row_5.Width,Obj_Obs_2_Row_5.Height)
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_3_Row_5.Xpos,Obj_Obs_3_Row_5.Ypos,Obj_Obs_3_Row_5.Width,Obj_Obs_3_Row_5.Height)
+            Obj_Player.m_Player_Obstacle_Collision(Obj_Obs_4_Row_5.Xpos,Obj_Obs_4_Row_5.Ypos,Obj_Obs_4_Row_5.Width,Obj_Obs_4_Row_5.Height)
+            Obj_Player.m_Player_Obstacle_Collision(obj_Obs_1_Hori_1.Xpos,obj_Obs_1_Hori_1.Ypos,obj_Obs_1_Hori_1.Width,obj_Obs_1_Hori_1.Height)
+            Obj_Player.m_Player_Obstacle_Collision(obj_Obs_1_Hori_2.Xpos,obj_Obs_1_Hori_2.Ypos,obj_Obs_1_Hori_2.Width,obj_Obs_1_Hori_2.Height)
+
+        }
+        
+        
+        
+        function f_clearScreen()
+        {
+            g_context.clearRect(0,0,g_canvas.width,g_canvas.height);
+            g_context.strokeRect(0,0,g_canvas.width,g_canvas.height);
+            g_context.fillStyle="#d099c3";
+            g_context.fillRect(0,0,g_canvas.width,g_canvas.height);
+        }
+        
+        
+        
+        function f_Draw()
+        {
+            Obj_Player.m_drawSquare(g_context);
+                Obj_Obs_1_Row_1.m_Draw_Obstacle(g_context);
+                Obj_Obs_2_Row_1.m_Draw_Obstacle(g_context);
+                
+                Obj_Obs_1_Row_2.m_Draw_Obstacle(g_context);
+                Obj_Obs_2_Row_2.m_Draw_Obstacle(g_context);
+                Obj_Obs_3_Row_2.m_Draw_Obstacle(g_context);
+                
+                Obj_Obs_1_Row_3.m_Draw_Obstacle(g_context);
+                Obj_Obs_2_Row_3.m_Draw_Obstacle(g_context);
+                Obj_Obs_3_Row_3.m_Draw_Obstacle(g_context);
+                
+                Obj_Obs_1_Row_4.m_Draw_Obstacle(g_context);
+                Obj_Obs_2_Row_4.m_Draw_Obstacle(g_context);
+                
+                Obj_Obs_1_Row_5.m_Draw_Obstacle(g_context);
+                Obj_Obs_2_Row_5.m_Draw_Obstacle(g_context);
+                Obj_Obs_3_Row_5.m_Draw_Obstacle(g_context);
+                Obj_Obs_4_Row_5.m_Draw_Obstacle(g_context);
+            
+                obj_Obs_1_Hori_1.m_Draw_Obstacle(g_context);
+                obj_Obs_1_Hori_2.m_Draw_Obstacle(g_context);
+        }
+        
+        
+        
+        
+        function f_movement(kd)
+        {
+
+        
+            if(kd.keyCode==38)
+                {
+                    Obj_Player.move_Up_flag=1;
+                }
+            if(kd.keyCode==40)
+                {
+                    Obj_Player.move_Down_flag=1;
+                }
+            if(kd.keyCode==39)
+                {
+                    Obj_Player.move_Right_flag=1;
+                }
+            if(kd.keyCode==32)
+                {
+                    Start_game_flag=1;
+                    Start_draw_flag=1
+                    console.log(Start_game_flag);
+                }
+           
+        }
+        function f_noMovement(ku)
+         {
+
+        
+            if(ku.keyCode==38)
+                {
+                   Obj_Player.move_Up_flag=0;
+                }
+            if(ku.keyCode==40)
+                {
+                    Obj_Player.move_Down_flag=0;
+                }
+            if(ku.keyCode==39)
+                {
+                    Obj_Player.move_Right_flag=0;
+                }
+
+            
+         }
+        
+        function f_gameLoop()
+        {
+            if(Start_game_flag==1)
+                {
+                    Obj_Player.m_Player_Movement();
+            
+                    f_obstacleMovement(); 
+                    f_obstacle_Border_Collision();
+                    f_player_And_Obstacle_Collision_Logic();
+                }
+
+            f_clearScreen();
+            
+            if(Start_draw_flag==1)
+                {
+                    
+                           f_Draw(); 
+                       
+                }
+            
+            if(Obj_Player.Stop_Game_Flag==1)
+                {
+                    Start_game_flag=0;
+                    g_context.font="70px Arial";
+                    g_context.fillStyle="#000000";
+                    g_context.fillText("Congratulation! You Won",400,g_canvas.height/2);
+                    
+              
+                }
+            if(Start_game_flag==0)
+                
+                {
+                    g_context.font="30px Arial";
+                    g_context.fillStyle="#000000";
+                    g_context.fillText("Press 'Right Arrow' To Move Right",500,200);
+                    g_context.fillText("Press 'Up Arrow' To Move Up",500,250);
+                    g_context.fillText("Press 'Down Arrow' To Move Down",500,300);
+                    g_context.fillText("Press 'Space' To Start Game",500,350);
+                    g_context.fillText("Instruction : Reach Right Border To Complete The Game",500,400);
+                }
+            
+        } 
+        
+        window.addEventListener("keydown",f_movement);
+        window.addEventListener("keyup",f_noMovement);
+       
+        
+        setInterval(f_gameLoop,TimeInterval);
+    </script>
+</html>
